@@ -43,7 +43,7 @@ func main() {
 	if err != nil {
 		color.Error.Printf("Failed to resolve %s: %v", host, err)
 		os.Exit(1)
-	} else {
+	} else if ips[0].String() != "::1" && ips[0].String() != "127.0.0.1" {
 		ipInfo, err := rapaping.GetIPInfo(ips[0].String())
 		if err == nil {
 			logger.Printf(infoFormat, color.Green.Sprint(strings.Join(rapaping.TransformIPArray(ips), ", ")), color.Green.Sprint(ipInfo.Hostname), color.Green.Sprint(ipInfo.City), color.Green.Sprint(ipInfo.Region), color.Green.Sprint(ipInfo.Country), color.Green.Sprint(ipInfo.Org))
